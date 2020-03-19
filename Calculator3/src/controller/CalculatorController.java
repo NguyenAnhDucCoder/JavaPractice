@@ -221,7 +221,7 @@ public class CalculatorController {
         newNumber = true;
         return ("0");
     }
-
+  
     public String inputDigit(String text, String input) {
         if (newNumber) {
             newNumber = false;

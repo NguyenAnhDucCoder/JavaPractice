@@ -1,0 +1,221 @@
+body{
+    background-color: #d5f46b;
+    background-attachment: fixed;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    background-size: 100%;
+}
+.size-content{
+    background-color: white;
+    width: 980px;
+    margin: auto;
+    box-shadow: 0 0 24px;
+    margin-top: -10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.header{
+    background-color: #4d4d4d;
+    margin-top: 0;
+    padding: 0 20px;
+    height: 100%;
+}
+.title-content{
+    padding: 30px 0;
+    font-family: "Times New Roman", Arial, Helvetica, sans-serif;
+}
+.title-header{
+    font-size: 45px;
+    color: #9bb350;
+}
+.subtitle-header{
+    font-size: 28px;
+    color:white;
+}
+
+/*menu*/
+.bar{
+    height: 35px;
+    background-color: #303030;
+    margin: 0 -20px;
+}
+
+.nav{
+    padding: 0;
+    list-style: none;
+}
+.nav li{
+    float: left;
+    line-height: 22px;
+}
+.nav li a{
+    padding: 15px;
+    text-decoration: none;
+    line-height: 35px;  
+    color: white;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 105%;
+}
+.nav li a:hover{
+    text-decoration: underline;
+}
+
+/*share box*/
+.share-box{
+    float: right;
+    width: 220px;
+    margin-right: 20px;
+
+    margin-top: 32px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px;
+}
+.share-header{
+    padding: 11px 15px;
+    font-size: 22px;
+    font-family: 'Times New Roman';
+}
+.share-content{
+    padding: 5px 15px 11px 15px;
+    line-height: 22px;
+}
+
+/*footer*/
+.footer-wrapper{
+    margin: 0 20px;
+    border-top: 1px lightgrey solid;
+    width: 96%;
+    padding: 30px 0 30px 0;
+    margin-bottom: 30px;
+    font-size: 13px;
+    display: flex;
+}
+.footer-wrapper a{
+    color: black;
+}
+
+/*Content*/
+.content-left{
+    width: 700px;
+    margin-bottom: 22px;
+    padding: 0 20px;
+    height: 100%;
+    float: left;
+}
+
+.section{
+    margin-top: 15px;
+    border-bottom: 3px dotted lightgrey;/*dau dot ngan content page*/
+    /*border-top: 3px dotted lightgrey;*/
+    font-size: 17px;
+}
+.map-content{
+    margin-top: 15px
+}
+.image-intro img
+{
+    height: 500px;
+    width: 700px;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.image-menu
+{
+    width: 350px;
+    height: 350px;
+    margin-top: 30px;
+    float: left;
+    margin-bottom: 40px;
+}
+
+.image-menu img
+{
+    width: 330px;
+    height: 330px;
+    border-radius: 10px;
+}
+.title-intro{
+    font-size: 25px;
+    margin-top: 30px;
+    font-weight: bold;
+}
+.content-home{
+    margin-top: 30px;
+}
+.menu-price{
+    font-size: 25px;
+    font-weight: bold;
+    margin-top: 30px;
+}
+.menu-head{
+    border-top: 1px lightgrey solid;
+    border-bottom: 1px lightgrey solid;
+    margin-top: 30px;
+}
+.price-title{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 660px;
+}
+.menu-title{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    float: left;
+}
+.menu-content{
+    margin-top: 30px;   
+    margin-bottom: 20px;
+}
+.price{
+    margin-top: 10px;
+    margin-bottom: 30px;
+    margin-left: 650px;
+}
+.menu-name{
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+.address-contact{
+    float: left;
+    margin-top: 40px;
+}
+.opening-hour{
+    margin-top: 40px;
+    margin-left: 350px;
+    margin-bottom: 30px;
+}
+.op{
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.ad{
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.page{
+    margin-left: 300px;
+}
+.page1 a{
+    box-shadow:2px 2px;
+    text-decoration: none;
+    font-size: 20px;
+    border-radius: 5px;
+    color: black;
+    float: left;
+    margin-left: 15px;
+    font-weight: bold;
+}
+.tel-find{
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+.opening{
+    margin-top: 7px;
+}
+.ad-name{
+    margin-bottom: 7px;
+}

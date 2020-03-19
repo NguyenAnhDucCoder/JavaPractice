@@ -1,5 +1,6 @@
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
@@ -20,6 +21,7 @@ public class View extends javax.swing.JFrame {
     public View() {
         initComponents();
     }
+
 
     public JButton getBtnMFirst() {
         return btnMFirst;
