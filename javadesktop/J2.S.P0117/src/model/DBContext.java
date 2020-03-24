@@ -38,5 +38,5 @@ public class DBContext {
     private final String dbName = "FU_DB";
     private final String portNumber = "1433";
     private final String userID = "sa";
-    private final String password = "fsoft@12345";
+    private final String password = "sa";
 }

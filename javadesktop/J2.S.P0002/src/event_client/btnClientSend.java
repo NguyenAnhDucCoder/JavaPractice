@@ -46,10 +46,12 @@ public class btnClientSend implements ActionListener {
             return;
         }
         try {
-            // read byte from input file
+            // get file from filename
             FileInputStream in = new FileInputStream(file);
-            byte fileByte[] = new byte[in.available()];
+            byte fileByte[] = new byte[(int) file.length()];
+            // read file byte from file
             in.read(fileByte);
+            in.close();
             // pass to data object
             Data data = new Data();
             data.setFilename(file.getName());
@@ -59,10 +61,7 @@ public class btnClientSend implements ActionListener {
             ClientAppController.outputStream.writeObject(data);
             // push data file to server
             ClientAppController.outputStream.flush();
-        } catch (FileNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Error to send file", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error to send file", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }

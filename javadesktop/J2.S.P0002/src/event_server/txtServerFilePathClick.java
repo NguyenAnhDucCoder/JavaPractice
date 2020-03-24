@@ -6,6 +6,7 @@
 package event_server;
 
 import controller.ServerAppController;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -15,7 +16,7 @@ import javax.swing.JFileChooser;
  *
  * @author ANH DUC
  */
-public class txtServerFilePathClick implements MouseListener {
+public class txtServerFilePathClick extends MouseAdapter {
 
     @Override
     public void mouseClicked(MouseEvent me) {
@@ -28,22 +29,6 @@ public class txtServerFilePathClick implements MouseListener {
             File directory = ServerAppController.j.getSelectedFile();
             ServerAppController.serverApp.getTxtSeverFilePath().setText(directory.getAbsolutePath());
         }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent me) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent me) {
     }
 
 }

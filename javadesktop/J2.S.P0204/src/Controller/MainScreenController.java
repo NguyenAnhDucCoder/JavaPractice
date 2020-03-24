@@ -27,31 +27,37 @@ public class MainScreenController {
 
     public MainScreenController() {
         mainScreen = new MainScreen();
-        //column names
+        //Show all worker
         showAllWorker();
         mainScreen.getBtnAdd().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                // call addcontroller
                 AddController ac = new AddController();
             }
         });
         mainScreen.getBtnUpdate().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                // if not select row
                 if (mainScreen.getjTable_Worker().getSelectedRow() == -1) {
+                    // show warning message
                     JOptionPane.showMessageDialog(null, "Please select row !!!", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
+                // call UpdateController
                 UpdateController updateController = new UpdateController();
             }
         });
         mainScreen.getBtnViewDetail().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                // if not select row
                 if (mainScreen.getjTable_Worker().getSelectedRow() == -1) {
                     JOptionPane.showMessageDialog(null, "Please select row !!!", "Warning", JOptionPane.WARNING_MESSAGE);
                     return;
                 }
+                // call DetailController
                 DetailController detailController = new DetailController();
             }
         });
@@ -65,31 +71,39 @@ public class MainScreenController {
         DefaultTableModel tableModel = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int i, int i1) {
+                // not edit cell in table
                 return false;
             }
         };
         tableModel.setColumnIdentifiers(columnName);
+        // set model for jTable_Worker
         mainScreen.getjTable_Worker().setModel(tableModel);
+        // setting image column
         mainScreen.getjTable_Worker().getColumn("Image").setCellRenderer(new TableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable jtable, Object o, boolean bln, boolean bln1, int i, int i1) {
+                // set row height
                 mainScreen.getjTable_Worker().setRowHeight(62);
                 return (Component) o;
             }
         });
         try {
+            // list all worker from database
             List<Worker> workers = new WorkerImplement().getAllWorker();
+            // add List<Worker> to tableModel
             for (Worker w : workers) {
                 tableModel.addRow(w.dataRow());
             }
         } catch (Exception ex) {
+            // show warning message
             JOptionPane.showMessageDialog(null, "Cannot show data !!!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }
 
     public static String getSelectedRow() {
+        // get row selected
         int row = mainScreen.getjTable_Worker().getSelectedRow();
+        // return content cell of first column and row selected
         return mainScreen.getjTable_Worker().getValueAt(row, 0).toString();
     }
-
 }

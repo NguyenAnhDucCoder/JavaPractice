@@ -36,7 +36,7 @@ public class ControllerView {
         {"1", "Stock one", "N01-Washington street", "2010-11-05", ""},
         {"2", "Stock two", "372 Cave town-001 Banks", "2011-09-07", ""},
         {"3", "Stock three", "Nary angle - 890 Number one", "2010-05-13", "Very Dangerous"},
-        {"DEMO", "Stock four", "Twin tower - 01 Main street", "2015-04-07", ""},
+        {"4", "Stock four", "Twin tower - 01 Main street", "2015-04-07", ""},
         {"5", "Stock five", "N01-Washington street", "2010-11-05", ""}
     };
 

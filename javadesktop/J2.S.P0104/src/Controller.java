@@ -39,7 +39,7 @@ public class Controller {
         view.getjTable().setModel(tableModel);
         // Set row selection at 0 , 0
         view.getjTable().setRowSelectionInterval(0, 0);
-        //Create event                                                                        of every button
+        //Create event of every button
         view.getBtnMNext().addActionListener(new btnMoveNextListener());
         view.getBtnMPrevious().addActionListener(new btnMovePreviousListener());
         view.getBtnMFirst().addActionListener(new btnMoveFirstListener());

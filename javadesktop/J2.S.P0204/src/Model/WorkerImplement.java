@@ -39,7 +39,7 @@ public class WorkerImplement implements WorkerInterface {
             }
             return listRoles;
         } catch (Exception e) {
-            throw e;
+            return null;
         } finally {
             dBContext.closeConnection(rs, ps, conn);
         }
@@ -67,7 +67,7 @@ public class WorkerImplement implements WorkerInterface {
             }
             return listWorkers;
         } catch (Exception e) {
-            throw e;
+            return null;
         } finally {
             dBContext.closeConnection(rs, ps, conn);
         }
@@ -99,7 +99,7 @@ public class WorkerImplement implements WorkerInterface {
                 return worker;
             }
         } catch (Exception e) {
-            throw e;
+            return null;
         } finally {
             db.closeConnection(rs, ps, conn);
         }

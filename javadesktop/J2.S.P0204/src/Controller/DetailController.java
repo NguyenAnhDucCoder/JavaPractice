@@ -33,6 +33,7 @@ public class DetailController {
         detailScreen.getBtnClose().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                // dispose
                 detailScreen.dispose();
             }
         });
@@ -44,15 +45,23 @@ public class DetailController {
     private void initDataWorker() {
         WorkerImplement workerImplement = new WorkerImplement();
         try {
+            // get worker by id
             Worker worker = workerImplement.getDetailWorker(Integer.parseInt(MainScreenController.getSelectedRow()));
+            // set text TxtID
             detailScreen.getTxtID().setText(String.valueOf(worker.getId()));
+            // set text TxtName
             detailScreen.getTxtName().setText(worker.getName());
+            // set text TxtRole
             detailScreen.getTxtRole().setText(worker.getRole().getRoleName());
+            // set text TxtGender
             detailScreen.getTxtGender().setText(worker.isGender() ? "Male" : "Female");
+            // convert to image from byte array
             Image img = ImageIO.read(new ByteArrayInputStream(worker.getImage()));
             ImageIcon imageIcon = new ImageIcon(img);
+            // add image to jLabel_Image
             detailScreen.getjLabel_Image().setIcon(new ImageIcon(CommonSub.scaleImageIcon(detailScreen.getjLabel_Image(), imageIcon)));
         } catch (Exception ex) {
+            // show warning message
             JOptionPane.showMessageDialog(null, "Cannot get worker detail !!!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }

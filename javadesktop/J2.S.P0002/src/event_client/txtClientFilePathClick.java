@@ -6,13 +6,14 @@
 package event_client;
 
 import controller.ClientAppController;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseListener;
 
 /**
  *
  * @author ANH DUC
  */
-public class txtClientFilePathClick implements MouseListener {
+public class txtClientFilePathClick extends MouseAdapter {
 
     @Override
     public void mouseClicked(java.awt.event.MouseEvent me) {
@@ -22,22 +23,6 @@ public class txtClientFilePathClick implements MouseListener {
         // get full path file
         ClientAppController.path = ClientAppController.j.getSelectedFile().getAbsolutePath();
         ClientAppController.clientApp.getTxtClientFilePath().setText(ClientAppController.path);
-    }
-
-    @Override
-    public void mousePressed(java.awt.event.MouseEvent me) {
-    }
-
-    @Override
-    public void mouseReleased(java.awt.event.MouseEvent me) {
-    }
-
-    @Override
-    public void mouseEntered(java.awt.event.MouseEvent me) {
-    }
-
-    @Override
-    public void mouseExited(java.awt.event.MouseEvent me) {
     }
 
 }
