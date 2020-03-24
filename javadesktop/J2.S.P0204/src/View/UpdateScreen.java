@@ -115,6 +115,7 @@ public class UpdateScreen extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Update");
+        setResizable(false);
 
         jLabel1.setText("Name");
 

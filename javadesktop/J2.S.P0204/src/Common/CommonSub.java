@@ -52,17 +52,18 @@ public class CommonSub {
         }
     }
 
-    public static byte[] ConvertFile(String filename) {
-        FileInputStream fileInputStream = null;
-        File file = new File(filename);
-        byte[] bs = new byte[(int) file.length()];
+    public static byte[] ConvertFileToByte(String filename) {
         try {
-            fileInputStream = new FileInputStream(file);
-            fileInputStream.read(bs);
+            // get file from filename
+            File file = new File(filename);
+            FileInputStream fileInputStream = new FileInputStream(file);
+            byte[] fileByte = new byte[(int) file.length()];
+            // read file byte from file
+            fileInputStream.read(fileByte);
             fileInputStream.close();
+            return fileByte;
         } catch (Exception e) {
-            bs = null;
+            return null;
         }
-        return bs;
     }
 }

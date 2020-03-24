@@ -6,6 +6,7 @@
 package Controller;
 
 import Common.CommonSub;
+import static Common.CommonSub.ConvertFileToByte;
 import static Controller.MainScreenController.mainScreen;
 import Entity.Role;
 import Entity.Worker;
@@ -72,7 +73,7 @@ public class UpdateController {
                 updateWorker();
             }
         });
-        // set JFrame Center
+        // set JDiolog Center
         updateScreen.setLocationRelativeTo(null);
         updateScreen.setVisible(true);
     }
@@ -132,7 +133,7 @@ public class UpdateController {
         boolean gender = updateScreen.getRadMale().isSelected();
         byte[] image = null;
         if (file != null) {
-            image = CommonSub.ConvertFile(file.getAbsolutePath());
+            image = ConvertFileToByte(file.getAbsolutePath());
         } else {
             image = worker.getImage();
         }

@@ -106,6 +106,7 @@ public class AddScreen extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Add");
+        setResizable(false);
 
         jLabel1.setText("Name");
 

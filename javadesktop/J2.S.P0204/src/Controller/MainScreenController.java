@@ -38,13 +38,21 @@ public class MainScreenController {
         mainScreen.getBtnUpdate().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                if (mainScreen.getjTable_Worker().getSelectedRow() == -1) {
+                    JOptionPane.showMessageDialog(null, "Please select row !!!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
                 UpdateController updateController = new UpdateController();
             }
         });
         mainScreen.getBtnViewDetail().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                UpdateController updateController = new UpdateController();
+                if (mainScreen.getjTable_Worker().getSelectedRow() == -1) {
+                    JOptionPane.showMessageDialog(null, "Please select row !!!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+                DetailController detailController = new DetailController();
             }
         });
         // set JFrame Center
@@ -81,8 +89,7 @@ public class MainScreenController {
 
     public static String getSelectedRow() {
         int row = mainScreen.getjTable_Worker().getSelectedRow();
-        int column = 0;
-        return mainScreen.getjTable_Worker().getValueAt(row, column).toString();
+        return mainScreen.getjTable_Worker().getValueAt(row, 0).toString();
     }
 
 }

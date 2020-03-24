@@ -6,6 +6,7 @@
 package Controller;
 
 import Common.CommonSub;
+import static Common.CommonSub.ConvertFileToByte;
 import static Controller.MainScreenController.mainScreen;
 import Entity.Role;
 import Entity.Worker;
@@ -67,7 +68,7 @@ public class AddController {
             public void mouseExited(MouseEvent me) {
             }
         });
-        // set JFrame Center
+        // set JDiolog Center
         addScreen.setLocationRelativeTo(null);
         addScreen.setVisible(true);
     }
@@ -113,7 +114,7 @@ public class AddController {
         WorkerImplement workerImplement = new WorkerImplement();
         String worker_name = addScreen.getTxtName().getText().trim();
         boolean worker_gender = addScreen.getRadMale().isSelected();
-        byte[] image = CommonSub.ConvertFile(file.getAbsolutePath());
+        byte[] image = ConvertFileToByte(file.getAbsolutePath());
         Role role = (Role) addScreen.getjComboBox_Role().getSelectedItem();
         Worker worker = new Worker(worker_name, worker_gender, image, role);
         try {
