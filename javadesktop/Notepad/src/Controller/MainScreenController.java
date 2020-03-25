@@ -319,12 +319,9 @@ public class MainScreenController {
         boolean checkPaste = true;
         try {
             try {
-                if (Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor).equals("")) {
-                    checkPaste = false;
-                } else {
-                    checkPaste = true;
-                }
+                checkPaste = !Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor).equals("");
             } catch (UnsupportedFlavorException ex) {
+                checkPaste = false;
             }
             mainScreen.getjMenuItem_Paste().setEnabled(checkPaste);
             // if can Redo
