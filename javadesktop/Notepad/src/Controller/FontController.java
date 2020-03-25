@@ -5,13 +5,13 @@ package Controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import View.FontScreen;
 import View.MainScreen;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.DefaultListModel;
@@ -68,15 +68,7 @@ public class FontController {
                 btnOK();
             }
         });
-        fontScreen.getTxtSize().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent ke) {
-            }
-
-            @Override
-            public void keyPressed(KeyEvent ke) {
-            }
-
+        fontScreen.getTxtSize().addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent ke) {
                 inputSizeValue();
@@ -84,9 +76,9 @@ public class FontController {
         });
     }
 
-    private void inputSizeValue(){
-         // get cuurent font
-        Font current_font =  fontScreen.getTxtSample().getFont();
+    private void inputSizeValue() {
+        // get cuurent font
+        Font current_font = fontScreen.getTxtSample().getFont();
         // get current font family name
         String fontFamilyName = current_font.getFamily();
         // get current font style
@@ -94,91 +86,92 @@ public class FontController {
         int fontSize = current_font.getSize();
         try {
             // set new fontsize after user input
-            fontSize = Integer.parseInt( fontScreen.getTxtSize().getText());
+            fontSize = Integer.parseInt(fontScreen.getTxtSize().getText());
             // set selected list size with fontsize value
-             fontScreen.getjListSize().setSelectedValue(fontSize, true);
+            fontScreen.getjListSize().setSelectedValue(fontSize, true);
             // create new font with corresponding values
             Font f = new Font(fontFamilyName, fontStyle, fontSize);
             // set font to text sample
-             fontScreen.getTxtSample().setFont(f);
+            fontScreen.getTxtSample().setFont(f);
         } catch (NumberFormatException e) {
             // set error mesage
-            JOptionPane.showMessageDialog( fontScreen, "Size is incorrect", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(fontScreen, "Size is incorrect", "Warning", JOptionPane.WARNING_MESSAGE);
             // Set text size again
-             fontScreen.getTxtSize().setText(String.valueOf(fontSize));
+            fontScreen.getTxtSize().setText(String.valueOf(fontSize));
             // set select jListSize
-             fontScreen.getjListSize().setSelectedValue(fontSize, true);
+            fontScreen.getjListSize().setSelectedValue(fontSize, true);
         }
     }
+
     private void btnOK() {
         // set font notepad text to text sample
-        ((MainScreen)  fontScreen.getParent()).getjTextArea_Notepad().setFont( fontScreen.getTxtSample().getFont());
+        ((MainScreen) fontScreen.getParent()).getjTextArea_Notepad().setFont(fontScreen.getTxtSample().getFont());
         // dispose font screen
-         fontScreen.dispose();
+        fontScreen.dispose();
     }
 
     private void btnCancel_JDilog() {
         // dispose dialog
-         fontScreen.dispose();
+        fontScreen.dispose();
     }
 
     private void jListSize_Value() {
         // get cuurent font
-        Font current_font =  fontScreen.getTxtSample().getFont();
+        Font current_font = fontScreen.getTxtSample().getFont();
         // get current font family name
         String fontName = current_font.getFamily();
         // get current font style
         int fontStyle = current_font.getStyle();
         // set value of selected jListSize
-        String a = String.valueOf( fontScreen.getjListSize().getSelectedValue());
+        String a = String.valueOf(fontScreen.getjListSize().getSelectedValue());
         // set text for txtSize
-         fontScreen.getTxtSize().setText(a);
+        fontScreen.getTxtSize().setText(a);
         // find current font size
         int fontSize = current_font.getSize();
         try {
             // set fontSize to TxtSize value
-            fontSize = Integer.parseInt( fontScreen.getTxtSize().getText());
+            fontSize = Integer.parseInt(fontScreen.getTxtSize().getText());
         } catch (Exception e) {
         }
         // pass new font size
         Font font = new Font(fontName, fontStyle, fontSize);
         // pass new font size to txtSample
-         fontScreen.getTxtSample().setFont(font);
+        fontScreen.getTxtSample().setFont(font);
     }
 
     private void jListFont_Value() {
         // get current font
-        Font current_font =  fontScreen.getTxtSample().getFont();
+        Font current_font = fontScreen.getTxtSample().getFont();
         // set selected font
-        String fontFamilyName =  fontScreen.getjListFont().getSelectedValue();
+        String fontFamilyName = fontScreen.getjListFont().getSelectedValue();
         // set current font style
         int fontStyle = current_font.getStyle();
         // set current font size
         int fontSize = current_font.getSize();
         // set text for font name
-         fontScreen.getTxtFont().setText(fontFamilyName);
+        fontScreen.getTxtFont().setText(fontFamilyName);
         // create new font with corresponding values
         Font f = new Font(fontFamilyName, fontStyle, fontSize);
         // set sample to font
-         fontScreen.getTxtSample().setFont(f);
+        fontScreen.getTxtSample().setFont(f);
     }
 
     private void jListFontStyle_Value() {
         // set current font
-        Font current =  fontScreen.getTxtSample().getFont();
+        Font current = fontScreen.getTxtSample().getFont();
         // get selected font style name
-        String fontStyleName =  fontScreen.getjListFontStyle().getSelectedValue();
+        String fontStyleName = fontScreen.getjListFontStyle().getSelectedValue();
         // get selected  index  font style
-        int fontStyle =  fontScreen.getjListFontStyle().getSelectedIndex();
+        int fontStyle = fontScreen.getjListFontStyle().getSelectedIndex();
         // get selected font size
         int fontSize = current.getSize();
         // set text to font style name
-         fontScreen.getTxtFontStyle().setText(fontStyleName);
+        fontScreen.getTxtFontStyle().setText(fontStyleName);
         // set current font name family
         String fontFamilyName = current.getFamily();
         Font f = new Font(fontFamilyName, fontStyle, fontSize);
         // set new font to txtSample
-         fontScreen.getTxtSample().setFont(f);
+        fontScreen.getTxtSample().setFont(f);
     }
 
     private void ListSize() {
@@ -207,24 +200,24 @@ public class FontController {
 
     private void setTextSample() {
         // set font to current font
-        Font f = ((MainScreen)  fontScreen.getParent()).getjTextArea_Notepad().getFont();
+        Font f = ((MainScreen) fontScreen.getParent()).getjTextArea_Notepad().getFont();
         // set font to text sample
-         fontScreen.getTxtSample().setFont(f);
+        fontScreen.getTxtSample().setFont(f);
 
         // set family font value to jListFont()
-         fontScreen.getjListFont().setSelectedValue(f.getFamily(), true);
+        fontScreen.getjListFont().setSelectedValue(f.getFamily(), true);
         // set text Family font value to TxtFont()
-         fontScreen.getTxtFont().setText(f.getFamily());
+        fontScreen.getTxtFont().setText(f.getFamily());
 
         // set fontstyle value to jListFontStyle
-         fontScreen.getjListFontStyle().setSelectedIndex(f.getStyle());
+        fontScreen.getjListFontStyle().setSelectedIndex(f.getStyle());
         // set fontstyle value to TxtFontStyle
-         fontScreen.getTxtFontStyle().setText(fontScreen.getjListFontStyle().getSelectedValue());
+        fontScreen.getTxtFontStyle().setText(fontScreen.getjListFontStyle().getSelectedValue());
 
         // set font size value to TxtSize
-         fontScreen.getTxtSize().setText(Integer.toString(f.getSize()));
+        fontScreen.getTxtSize().setText(Integer.toString(f.getSize()));
         // set font size value to jListSize
-         fontScreen.getjListSize().setSelectedValue(f.getSize(), true);
+        fontScreen.getjListSize().setSelectedValue(f.getSize(), true);
 
     }
 

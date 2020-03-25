@@ -7,13 +7,20 @@ package Controller;
  */
 import View.MainScreen;
 import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE;
@@ -309,14 +316,27 @@ public class MainScreenController {
         mainScreen.getjMenuItem_Cut().setEnabled(isSelect);
         // display copy item if hightlight text
         mainScreen.getjMenuItem_Copy().setEnabled(isSelect);
-
-        // if can Redo
-        if (undoManager.canRedo()) {
-            // Enabled getjMenuItem_Redo
-            mainScreen.getjMenuItem_Redo().setEnabled(true);
-        } else {
-            // if cannot Redo Disabled getjMenuItem_Redo
-            mainScreen.getjMenuItem_Redo().setEnabled(false);
+        boolean checkPaste = true;
+        try {
+            try {
+                if (Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor).equals("")) {
+                    checkPaste = false;
+                } else {
+                    checkPaste = true;
+                }
+            } catch (UnsupportedFlavorException ex) {
+            }
+            mainScreen.getjMenuItem_Paste().setEnabled(checkPaste);
+            // if can Redo
+            if (undoManager.canRedo()) {
+                // Enabled getjMenuItem_Redo
+                mainScreen.getjMenuItem_Redo().setEnabled(true);
+            } else {
+                // if cannot Redo Disabled getjMenuItem_Redo
+                mainScreen.getjMenuItem_Redo().setEnabled(false);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(MainScreenController.class.getName()).log(Level.SEVERE, null, ex);
         }
         // if can Undo
         if (undoManager.canUndo()) {

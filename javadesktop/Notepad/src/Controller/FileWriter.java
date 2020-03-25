@@ -33,6 +33,7 @@ public class FileWriter {
             printWriter.print(content);
             printWriter.close();
         } catch (Exception e) {
+            // show warning message
             JOptionPane.showMessageDialog(null, "Something wrong", "Warning", JOptionPane.WARNING_MESSAGE);
         }
     }
