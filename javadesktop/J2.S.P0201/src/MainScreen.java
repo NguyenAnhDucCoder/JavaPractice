@@ -53,14 +53,6 @@ public class MainScreen extends javax.swing.JFrame {
         this.btnRight = btnRight;
     }
 
-    public JPanel getjPanel_Circle() {
-        return jPanel_Circle;
-    }
-
-    public void setjPanel_Circle(JPanel jPanel_Circle) {
-        this.jPanel_Circle = jPanel_Circle;
-    }
-
     public JPanel getjPanel_Screen() {
         return jPanel_Screen;
     }
@@ -85,7 +77,6 @@ public class MainScreen extends javax.swing.JFrame {
         btnRight = new javax.swing.JButton();
         btnBottom = new javax.swing.JButton();
         jPanel_Screen = new javax.swing.JPanel();
-        jPanel_Circle = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -100,53 +91,36 @@ public class MainScreen extends javax.swing.JFrame {
 
         jPanel_Screen.setBackground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout jPanel_CircleLayout = new javax.swing.GroupLayout(jPanel_Circle);
-        jPanel_Circle.setLayout(jPanel_CircleLayout);
-        jPanel_CircleLayout.setHorizontalGroup(
-            jPanel_CircleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 56, Short.MAX_VALUE)
-        );
-        jPanel_CircleLayout.setVerticalGroup(
-            jPanel_CircleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 56, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout jPanel_ScreenLayout = new javax.swing.GroupLayout(jPanel_Screen);
         jPanel_Screen.setLayout(jPanel_ScreenLayout);
         jPanel_ScreenLayout.setHorizontalGroup(
             jPanel_ScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_ScreenLayout.createSequentialGroup()
-                .addGap(199, 199, 199)
-                .addComponent(jPanel_Circle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 465, Short.MAX_VALUE)
         );
         jPanel_ScreenLayout.setVerticalGroup(
             jPanel_ScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel_ScreenLayout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(jPanel_Circle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(102, Short.MAX_VALUE))
+            .addGap(0, 254, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addComponent(jPanel_Screen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
                         .addComponent(btnLeft)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRight))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
+                        .addGap(31, 31, 31)
                         .addComponent(btnUp, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(193, 193, 193)
+                        .addGap(26, 26, 26)
                         .addComponent(btnBottom)))
-                .addContainerGap(180, Short.MAX_VALUE))
-            .addComponent(jPanel_Screen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(163, 163, 163))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,7 +180,6 @@ public class MainScreen extends javax.swing.JFrame {
     private javax.swing.JButton btnLeft;
     private javax.swing.JButton btnRight;
     private javax.swing.JButton btnUp;
-    private javax.swing.JPanel jPanel_Circle;
     private javax.swing.JPanel jPanel_Screen;
     // End of variables declaration//GEN-END:variables
 }

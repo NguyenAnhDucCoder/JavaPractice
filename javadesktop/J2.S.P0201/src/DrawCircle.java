@@ -20,15 +20,15 @@ public class DrawCircle extends JPanel {
     public DrawCircle(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
         this.setBackground(Color.WHITE);
-        this.setSize(mainScreen.getjPanel_Circle().getWidth(), mainScreen.getjPanel_Circle().getHeight());
+        this.setBounds(mainScreen.getjPanel_Screen().getWidth()/2 - 25, mainScreen.getjPanel_Screen().getHeight()/2 - 25, 50, 50);
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
         g.setColor(Color.BLUE);
-        g.drawOval(0, 0, mainScreen.getjPanel_Circle().getWidth(), mainScreen.getjPanel_Circle().getHeight());
-        g.fillOval(0, 0, mainScreen.getjPanel_Circle().getWidth(), mainScreen.getjPanel_Circle().getHeight());
+        g.drawOval(0, 0, 50, 50);
+        g.fillOval(0, 0, 50, 50);
     }
 
 }

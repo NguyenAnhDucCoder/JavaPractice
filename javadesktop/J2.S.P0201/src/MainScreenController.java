@@ -23,47 +23,47 @@ public class MainScreenController {
     public MainScreenController() {
         mainScreen = new MainScreen();
         DrawCircle circle = new DrawCircle(mainScreen);
-        mainScreen.getjPanel_Circle().add(circle);
+        mainScreen.getjPanel_Screen().add(circle);
         mainScreen.getBtnBottom().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (mainScreen.getjPanel_Screen().getHeight()
-                        < mainScreen.getjPanel_Circle().getY() + mainScreen.getjPanel_Circle().getHeight() + move) {
+                        < circle.getY() + circle.getHeight() + move) {
                     JOptionPane.showMessageDialog(null, "Cannot move anymore !!!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                mainScreen.getjPanel_Circle().setLocation(mainScreen.getjPanel_Circle().getX(), mainScreen.getjPanel_Circle().getY() + move);
+                circle.setLocation(circle.getX(), circle.getY() + move);
             }
         });
         mainScreen.getBtnLeft().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if (0 > mainScreen.getjPanel_Circle().getX() - move) {
+                if (0 > circle.getX() - move) {
                     JOptionPane.showMessageDialog(null, "Cannot move anymore !!!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                mainScreen.getjPanel_Circle().setLocation(mainScreen.getjPanel_Circle().getX() - move, mainScreen.getjPanel_Circle().getY());
+                circle.setLocation(circle.getX() - move, circle.getY());
             }
         });
         mainScreen.getBtnRight().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 if (mainScreen.getjPanel_Screen().getWidth()
-                        < mainScreen.getjPanel_Circle().getX() + move + mainScreen.getjPanel_Circle().getWidth()) {
+                        < circle.getX() + move +circle.getWidth()) {
                     JOptionPane.showMessageDialog(null, "Cannot move anymore !!!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                mainScreen.getjPanel_Circle().setLocation(mainScreen.getjPanel_Circle().getX() + move, mainScreen.getjPanel_Circle().getY());
+               circle.setLocation(circle.getX() + move, circle.getY());
             }
         });
         mainScreen.getBtnUp().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                if (0 > mainScreen.getjPanel_Circle().getY() - move) {
+                if (0 > circle.getY() - move) {
                     JOptionPane.showMessageDialog(null, "Cannot move anymore !!!", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                mainScreen.getjPanel_Circle().setLocation(mainScreen.getjPanel_Circle().getX(), mainScreen.getjPanel_Circle().getY() - move);
+                circle.setLocation(circle.getX(),circle.getY() - move);
             }
         });
         mainScreen.setLocationRelativeTo(null);
