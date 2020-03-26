@@ -56,22 +56,22 @@ public class ReplaceScreenController {
     }
 
     private void btnReplace_All() {
-        MainScreenController.matchcase = replaceScreen.getMatchCase().isSelected();
+        mainScreenController.setMatchcase(replaceScreen.getMatchCase().isSelected());
         // set find String with text file
-        MainScreenController.findString = replaceScreen.getTxtFindWhat().getText();
+        mainScreenController.setFindString(replaceScreen.getTxtFindWhat().getText());
         // replace all
         mainScreenController.ReplaceAll(replaceScreen.getTxtReplaceWith().getText());
     }
 
     private void btnReplace() {
         // set value wrapAround
-        MainScreenController.wrapAround = replaceScreen.getWrapAround().isSelected();
+        mainScreenController.setWrapAround(replaceScreen.getWrapAround().isSelected());
         // set value matchcase
-        MainScreenController.matchcase = replaceScreen.getMatchCase().isSelected();
+        mainScreenController.setMatchcase(replaceScreen.getMatchCase().isSelected());
         // set findDown is RadDown value
-        MainScreenController.findDown = true;
+        mainScreenController.setFindDown(true);
         // set find String to text find
-        MainScreenController.findString = replaceScreen.getTxtFindWhat().getText();
+        mainScreenController.setFindString(replaceScreen.getTxtFindWhat().getText());
         // Replace text
         mainScreenController.ReplaceText(replaceScreen.getTxtReplaceWith().getText());
     }
@@ -82,12 +82,12 @@ public class ReplaceScreenController {
     }
 
     private void btnFind() {
-        MainScreenController.wrapAround = replaceScreen.getWrapAround().isSelected();
-        MainScreenController.matchcase = replaceScreen.getMatchCase().isSelected();
+        mainScreenController.setWrapAround(replaceScreen.getWrapAround().isSelected());
+        mainScreenController.setMatchcase(replaceScreen.getMatchCase().isSelected());
         // set finddown to rad direction
-        MainScreenController.findDown = true;
+        mainScreenController.setFindDown(true);
         // set findString is TxtFindWhat
-        MainScreenController.findString = replaceScreen.getTxtFindWhat().getText();
+        mainScreenController.setFindString(replaceScreen.getTxtFindWhat().getText());
         // find next hightlight
         mainScreenController.findNextSelecttion();
     }

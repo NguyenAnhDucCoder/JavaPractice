@@ -5,7 +5,6 @@ package Controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import View.FindScreen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,14 +19,14 @@ public class FindScreenController {
     private final MainScreenController mainScreenController;
 
     public FindScreenController(MainScreenController mainScreenController) {
-        this.mainScreenController = mainScreenController; 
+        this.mainScreenController = mainScreenController;
         findScreen = new FindScreen(mainScreenController.getMainScreen(), true);
         // set Hightlight text to txtFind
         if (mainScreenController.getMainScreen().getjTextArea_Notepad().getSelectedText() != null) {
             findScreen.getTxtFind().setText(mainScreenController.getMainScreen().getjTextArea_Notepad().getSelectedText());
         } // not Hightlight text set findString to txtFind
         else {
-            findScreen.getTxtFind().setText(MainScreenController.findString);
+            findScreen.getTxtFind().setText(mainScreenController.getFindString());
         }
         // call event
         Event();
@@ -57,12 +56,12 @@ public class FindScreenController {
     }
 
     private void btnFindNextEvent() {
-        MainScreenController.wrapAround = findScreen.getWrapAround().isSelected();
-        MainScreenController.matchcase = findScreen.getMatchCase().isSelected();
+        mainScreenController.setWrapAround(findScreen.getWrapAround().isSelected());
+        mainScreenController.setMatchcase(findScreen.getMatchCase().isSelected());
         // set findDown is RadDown value
-        MainScreenController.findDown = findScreen.getRadDown().isSelected();
+        mainScreenController.setFindDown(findScreen.getRadDown().isSelected());
         // set find String to text find
-        MainScreenController.findString = findScreen.getTxtFind().getText();
+        mainScreenController.setFindString(findScreen.getTxtFind().getText());
         // find next hightlight text
         mainScreenController.findNextSelecttion();
     }

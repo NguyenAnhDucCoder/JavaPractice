@@ -37,14 +37,14 @@ import javax.swing.undo.UndoManager;
 public class MainScreenController {
 
     private MainScreen mainScreen;
-    protected static boolean isNewFile;
-    protected static String originalText;
-    private UndoManager undoManager;
-    public static String findString;
-    public static boolean findDown;
-    protected static String filePath;
-    public static boolean matchcase;
-    public static boolean wrapAround;
+    private boolean isNewFile;
+    private String originalText;
+    private final UndoManager undoManager;
+    private String findString;
+    private boolean findDown;
+    private String filePath;
+    private boolean matchcase;
+    private boolean wrapAround;
 
     public MainScreen getMainScreen() {
         return mainScreen;
@@ -52,6 +52,38 @@ public class MainScreenController {
 
     public void setMainScreen(MainScreen mainScreen) {
         this.mainScreen = mainScreen;
+    }
+
+    public boolean isWrapAround() {
+        return wrapAround;
+    }
+
+    public void setWrapAround(boolean wrapAround) {
+        this.wrapAround = wrapAround;
+    }
+
+    public String getFindString() {
+        return findString;
+    }
+
+    public void setFindString(String findString) {
+        this.findString = findString;
+    }
+
+    public boolean isFindDown() {
+        return findDown;
+    }
+
+    public void setFindDown(boolean findDown) {
+        this.findDown = findDown;
+    }
+
+    public boolean isMatchcase() {
+        return matchcase;
+    }
+
+    public void setMatchcase(boolean matchcase) {
+        this.matchcase = matchcase;
     }
 
     public MainScreenController() {
