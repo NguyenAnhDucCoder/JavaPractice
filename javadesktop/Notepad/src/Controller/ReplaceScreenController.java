@@ -5,7 +5,6 @@ package Controller;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import View.ReplaceScreen;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,12 +13,14 @@ import java.awt.event.ActionListener;
  *
  * @author ANH DUC
  */
-public class ReplaceScreenController {   
+public class ReplaceScreenController {
 
-    protected ReplaceScreen replaceScreen;
+    private final ReplaceScreen replaceScreen;
+    private final MainScreenController mainScreenController;
 
-    public ReplaceScreenController() {
-        replaceScreen = new ReplaceScreen(MainScreenController.mainScreen, true);
+    public ReplaceScreenController(MainScreenController mainScreenController) {
+        this.mainScreenController = mainScreenController;
+        replaceScreen = new ReplaceScreen(mainScreenController.getMainScreen(), true);
         // add event
         Event();
         // set center Replace
@@ -59,7 +60,7 @@ public class ReplaceScreenController {
         // set find String with text file
         MainScreenController.findString = replaceScreen.getTxtFindWhat().getText();
         // replace all
-        MainScreenController.ReplaceAll(replaceScreen.getTxtReplaceWith().getText());
+        mainScreenController.ReplaceAll(replaceScreen.getTxtReplaceWith().getText());
     }
 
     private void btnReplace() {
@@ -72,7 +73,7 @@ public class ReplaceScreenController {
         // set find String to text find
         MainScreenController.findString = replaceScreen.getTxtFindWhat().getText();
         // Replace text
-        MainScreenController.ReplaceText(replaceScreen.getTxtReplaceWith().getText());
+        mainScreenController.ReplaceText(replaceScreen.getTxtReplaceWith().getText());
     }
 
     private void btnCancel() {
@@ -88,7 +89,7 @@ public class ReplaceScreenController {
         // set findString is TxtFindWhat
         MainScreenController.findString = replaceScreen.getTxtFindWhat().getText();
         // find next hightlight
-        MainScreenController.findNextSelecttion();
+        mainScreenController.findNextSelecttion();
     }
 
 }

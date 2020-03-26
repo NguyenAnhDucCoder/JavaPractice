@@ -16,13 +16,15 @@ import java.awt.event.ActionListener;
  */
 public class FindScreenController {
 
-    protected FindScreen findScreen;
+    private final FindScreen findScreen;
+    private final MainScreenController mainScreenController;
 
-    public FindScreenController() {
-        findScreen = new FindScreen(MainScreenController.mainScreen, true);
+    public FindScreenController(MainScreenController mainScreenController) {
+        this.mainScreenController = mainScreenController; 
+        findScreen = new FindScreen(mainScreenController.getMainScreen(), true);
         // set Hightlight text to txtFind
-        if (MainScreenController.mainScreen.getjTextArea_Notepad().getSelectedText() != null) {
-            findScreen.getTxtFind().setText(MainScreenController.mainScreen.getjTextArea_Notepad().getSelectedText());
+        if (mainScreenController.getMainScreen().getjTextArea_Notepad().getSelectedText() != null) {
+            findScreen.getTxtFind().setText(mainScreenController.getMainScreen().getjTextArea_Notepad().getSelectedText());
         } // not Hightlight text set findString to txtFind
         else {
             findScreen.getTxtFind().setText(MainScreenController.findString);
@@ -62,6 +64,6 @@ public class FindScreenController {
         // set find String to text find
         MainScreenController.findString = findScreen.getTxtFind().getText();
         // find next hightlight text
-        MainScreenController.findNextSelecttion();
+        mainScreenController.findNextSelecttion();
     }
 }

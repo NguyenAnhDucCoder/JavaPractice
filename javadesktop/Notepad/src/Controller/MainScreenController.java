@@ -6,15 +6,13 @@ package Controller;
  * and open the template in the editor.
  */
 import View.MainScreen;
-import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -38,15 +36,23 @@ import javax.swing.undo.UndoManager;
  */
 public class MainScreenController {
 
-    public static MainScreen mainScreen;
+    private MainScreen mainScreen;
     protected static boolean isNewFile;
     protected static String originalText;
-    protected static UndoManager undoManager = new UndoManager();
+    private UndoManager undoManager;
     public static String findString;
     public static boolean findDown;
     protected static String filePath;
     public static boolean matchcase;
     public static boolean wrapAround;
+
+    public MainScreen getMainScreen() {
+        return mainScreen;
+    }
+
+    public void setMainScreen(MainScreen mainScreen) {
+        this.mainScreen = mainScreen;
+    }
 
     public MainScreenController() {
         mainScreen = new MainScreen();
@@ -55,6 +61,7 @@ public class MainScreenController {
         originalText = "";
         isNewFile = true;
         matchcase = true;
+        undoManager = new UndoManager();
         // set JFrame Center
         mainScreen.setLocationRelativeTo(null);
         // add list event
@@ -92,7 +99,7 @@ public class MainScreenController {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 // show font screen
-                FontController fontController = new FontController();
+                FontController fontController = new FontController(MainScreenController.this);
             }
         });
         mainScreen.getjMenuItem_New().addActionListener(new ActionListener() {
@@ -127,7 +134,7 @@ public class MainScreenController {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 // Replace text
-                ReplaceScreenController replaceScreenController = new ReplaceScreenController();
+                ReplaceScreenController replaceScreenController = new ReplaceScreenController(MainScreenController.this);
             }
         });
         mainScreen.getjMenuItem_Save().addActionListener(new ActionListener() {
@@ -158,11 +165,7 @@ public class MainScreenController {
                 }
             }
         });
-        mainScreen.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent we) {
-            }
-
+        mainScreen.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent we) {
                 // check save file or not
@@ -172,26 +175,6 @@ public class MainScreenController {
                     return;
                 }
                 System.exit(0);
-            }
-
-            @Override
-            public void windowClosed(WindowEvent we) {
-            }
-
-            @Override
-            public void windowIconified(WindowEvent we) {
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent we) {
-            }
-
-            @Override
-            public void windowActivated(WindowEvent we) {
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent we) {
             }
         });
         mainScreen.getjMenuEdit().addMenuListener(new MenuListener() {
@@ -347,7 +330,7 @@ public class MainScreenController {
 
     private void jMenuItem_Find() {
         // open find form
-        FindScreenController screenController = new FindScreenController();
+        FindScreenController screenController = new FindScreenController(MainScreenController.this);
     }
 
     private void jMenuItem_Exit() {
@@ -381,7 +364,58 @@ public class MainScreenController {
         );
     }
 
-    public static int findNext() {
+    private boolean isSave() {
+        // check whether file is edit or not
+        if (!originalText.equals(mainScreen.getjTextArea_Notepad().getText())) {
+            int result;
+            Object[] chooses = {"Save",
+                "Don't save",
+                "Cancel"};
+            // if new file
+            if (isNewFile) {
+                // new file display message to save
+                result = JOptionPane.showOptionDialog(mainScreen, "Do you want to save changes MTE", "MTE",
+                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, chooses, chooses[0]);
+            } else {
+                // not new file display message to save in old folder
+                result = JOptionPane.showOptionDialog(mainScreen, "Do you want to save changes to " + filePath, "MTE",
+                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, chooses, chooses[0]);
+            }
+            // Yes message option
+            if (result == JOptionPane.YES_OPTION) {
+                // if new file
+                if (isNewFile) {
+                    // create new destination to save file
+                    JFileChooser fc = new JFileChooser();
+                    // add default JFileChooser is txt file
+                    fc.setFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
+                    if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+                        try {
+                            filePath = fc.getSelectedFile().getPath();
+                            // write new file with file path selected
+                            FileWriter wf = new FileWriter(filePath + ".txt", mainScreen.getjTextArea_Notepad().getText());
+                            wf.WriteFile();
+                        } catch (Exception e) {
+                        }
+                    }
+                } // Not new file
+                else {
+                    try {
+                        // write file to old file text
+                        FileWriter wf = new FileWriter(filePath, mainScreen.getjTextArea_Notepad().getText());
+                        wf.WriteFile();
+                    } catch (Exception e) {
+                    }
+                }
+            } else if (result == JOptionPane.CANCEL_OPTION) {
+                // click cancel button to return
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public int findNext() {
 
         // get String of text notepad
         String txtNotepad = mainScreen.getjTextArea_Notepad().getText();
@@ -454,7 +488,7 @@ public class MainScreenController {
         return lastIndex;
     }
 
-    public static void findNextSelecttion() {
+    public void findNextSelecttion() {
         // hightlight next found text
         if (findNext() != -1) {
             mainScreen.getjTextArea_Notepad().select(findNext(), findNext() + findString.length());
@@ -464,7 +498,7 @@ public class MainScreenController {
         }
     }
 
-    public static void ReplaceText(String content) {
+    public void ReplaceText(String content) {
         // if text not selected
         if (mainScreen.getjTextArea_Notepad().getSelectedText() == null) {
             // hightlight content  
@@ -508,7 +542,7 @@ public class MainScreenController {
 
     }
 
-    public static void ReplaceAll(String replaceWith) {
+    public void ReplaceAll(String replaceWith) {
         if (matchcase) {
             // replace all
             String txt_replace = mainScreen.getjTextArea_Notepad().getText().replaceAll(findString, replaceWith);
@@ -520,57 +554,6 @@ public class MainScreenController {
             txt_replace = txt_replace.replaceAll(findString.toUpperCase(), replaceWith);
             mainScreen.getjTextArea_Notepad().setText(txt_replace);
         }
-    }
-
-    public static boolean isSave() {
-        // check whether file is edit or not
-        if (!originalText.equals(mainScreen.getjTextArea_Notepad().getText())) {
-            int result;
-            Object[] chooses = {"Save",
-                "Don't save",
-                "Cancel"};
-            // if new file
-            if (isNewFile) {
-                // new file display message to save
-                result = JOptionPane.showOptionDialog(mainScreen, "Do you want to save changes MTE", "MTE",
-                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, chooses, chooses[0]);
-            } else {
-                // not new file display message to save in old folder
-                result = JOptionPane.showOptionDialog(mainScreen, "Do you want to save changes to " + filePath, "MTE",
-                        JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null, chooses, chooses[0]);
-            }
-            // Yes message option
-            if (result == JOptionPane.YES_OPTION) {
-                // if new file
-                if (isNewFile) {
-                    // create new destination to save file
-                    JFileChooser fc = new JFileChooser();
-                    // add default JFileChooser is txt file
-                    fc.setFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
-                    if (fc.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-                        try {
-                            filePath = fc.getSelectedFile().getPath();
-                            // write new file with file path selected
-                            FileWriter wf = new FileWriter(filePath + ".txt", mainScreen.getjTextArea_Notepad().getText());
-                            wf.WriteFile();
-                        } catch (Exception e) {
-                        }
-                    }
-                } // Not new file
-                else {
-                    try {
-                        // write file to old file text
-                        FileWriter wf = new FileWriter(filePath, mainScreen.getjTextArea_Notepad().getText());
-                        wf.WriteFile();
-                    } catch (Exception e) {
-                    }
-                }
-            } else if (result == JOptionPane.CANCEL_OPTION) {
-                // click cancel button to return
-                return false;
-            }
-        }
-        return true;
     }
 
 }

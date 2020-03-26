@@ -25,10 +25,12 @@ import javax.swing.event.ListSelectionListener;
  */
 public class FontController {
 
-    protected FontScreen fontScreen;
+    private final FontScreen fontScreen;
+    private final MainScreenController mainScreenController;
 
-    public FontController() {
-        fontScreen = new FontScreen(MainScreenController.mainScreen, true);
+    public FontController(MainScreenController mainScreenController) {
+        this.mainScreenController = mainScreenController;
+        fontScreen = new FontScreen(mainScreenController.getMainScreen(), true);
         ListFont();
         ListSize();
         setTextSample();
