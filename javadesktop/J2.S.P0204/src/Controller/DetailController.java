@@ -13,8 +13,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.ByteArrayInputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -25,10 +23,12 @@ import javax.swing.JOptionPane;
  */
 public class DetailController {
 
-    DetailScreen detailScreen;
+    private DetailScreen detailScreen;
+    private final MainScreenController mainScreenController;
 
-    public DetailController() {
-        detailScreen = new DetailScreen(MainScreenController.mainScreen, true);
+    public DetailController(MainScreenController mainScreenController) {
+        this.mainScreenController = mainScreenController;
+        detailScreen = new DetailScreen(mainScreenController.getMainScreen(), true);
         initDataWorker();
         detailScreen.getBtnClose().addActionListener(new ActionListener() {
             @Override
@@ -46,7 +46,7 @@ public class DetailController {
         WorkerImplement workerImplement = new WorkerImplement();
         try {
             // get worker by id
-            Worker worker = workerImplement.getDetailWorker(Integer.parseInt(MainScreenController.getSelectedRow()));
+            Worker worker = workerImplement.getDetailWorker(Integer.parseInt(mainScreenController.getSelectedRow()));
             // set text TxtID
             detailScreen.getTxtID().setText(String.valueOf(worker.getId()));
             // set text TxtName

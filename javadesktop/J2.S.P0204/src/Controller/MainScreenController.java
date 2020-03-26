@@ -23,7 +23,15 @@ import javax.swing.table.TableCellRenderer;
  */
 public class MainScreenController {
 
-    public static MainScreen mainScreen;
+    private MainScreen mainScreen;
+
+    public MainScreen getMainScreen() {
+        return mainScreen;
+    }
+
+    public void setMainScreen(MainScreen mainScreen) {
+        this.mainScreen = mainScreen;
+    }
 
     public MainScreenController() {
         mainScreen = new MainScreen();
@@ -33,7 +41,7 @@ public class MainScreenController {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 // call addcontroller
-                AddController ac = new AddController();
+                AddController ac = new AddController(MainScreenController.this);
             }
         });
         mainScreen.getBtnUpdate().addActionListener(new ActionListener() {
@@ -46,7 +54,7 @@ public class MainScreenController {
                     return;
                 }
                 // call UpdateController
-                UpdateController updateController = new UpdateController();
+                UpdateController updateController = new UpdateController(MainScreenController.this);
             }
         });
         mainScreen.getBtnViewDetail().addActionListener(new ActionListener() {
@@ -58,7 +66,7 @@ public class MainScreenController {
                     return;
                 }
                 // call DetailController
-                DetailController detailController = new DetailController();
+                DetailController detailController = new DetailController(MainScreenController.this);
             }
         });
         // set JFrame Center
@@ -66,7 +74,7 @@ public class MainScreenController {
         mainScreen.setVisible(true);
     }
 
-    public static void showAllWorker() {
+    public void showAllWorker() {
         String[] columnName = {"ID", "Name", "Gender", "Image"};
         DefaultTableModel tableModel = new DefaultTableModel() {
             @Override
@@ -100,7 +108,7 @@ public class MainScreenController {
         }
     }
 
-    public static String getSelectedRow() {
+    public String getSelectedRow() {
         // get row selected
         int row = mainScreen.getjTable_Worker().getSelectedRow();
         // return content cell of first column and row selected

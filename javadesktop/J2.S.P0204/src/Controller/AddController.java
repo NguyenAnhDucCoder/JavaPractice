@@ -7,7 +7,6 @@ package Controller;
 
 import Common.CommonSub;
 import static Common.CommonSub.ConvertFileToByte;
-import static Controller.MainScreenController.mainScreen;
 import Entity.Role;
 import Entity.Worker;
 import Model.WorkerImplement;
@@ -32,11 +31,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class AddController {
 
     private File file;
-    private DefaultComboBoxModel<Role> modelRole;
-    protected AddScreen addScreen;
+    private final DefaultComboBoxModel<Role> modelRole;
+    private final AddScreen addScreen;
+    private final MainScreenController mainScreenController;
 
-    public AddController() {
-        addScreen = new AddScreen(mainScreen, true);
+    public AddController(MainScreenController mainScreenController) {
+        this.mainScreenController = mainScreenController;
+        addScreen = new AddScreen(mainScreenController.getMainScreen(), true);
         modelRole = new DefaultComboBoxModel<>();
         // set model for jComboBox_Role
         addScreen.getjComboBox_Role().setModel(modelRole);
@@ -98,14 +99,14 @@ public class AddController {
             addScreen.getTxtName().requestFocus();
             return;
         }
-        // check choose file image
-        if (file == null) {
-            JOptionPane.showMessageDialog(addScreen, "Please choose image !!!", "Alert", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
         // check choose gender
         if (addScreen.getRadMale().isSelected() == false && addScreen.getRadFemale().isSelected() == false) {
             JOptionPane.showMessageDialog(addScreen, "Please choose your gender !!!", "Alert", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        // check choose file image
+        if (file == null) {
+            JOptionPane.showMessageDialog(addScreen, "Please choose image !!!", "Alert", JOptionPane.ERROR_MESSAGE);
             return;
         }
         WorkerImplement workerImplement = new WorkerImplement();
@@ -127,7 +128,7 @@ public class AddController {
                 // dispose 
                 addScreen.dispose();
                 // show data to jTable again
-                MainScreenController.showAllWorker();
+                mainScreenController.showAllWorker();
             } else {
                 // show failed message
                 JOptionPane.showMessageDialog(addScreen, "One Worker added failed !!!", "Alert", JOptionPane.ERROR_MESSAGE);

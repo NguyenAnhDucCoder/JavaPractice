@@ -27,14 +27,19 @@ public class WorkerImplement implements WorkerInterface {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
+            // select all role
             String query = "Select * from [Role]";
             conn = dBContext.getConnection();
             ps = conn.prepareStatement(query);
+            // execute query
             rs = ps.executeQuery();
             while (rs.next()) {
                 Role r = new Role();
+                // get ID from db
                 r.setId(rs.getInt("ID"));
+                // get RoleName from db
                 r.setRoleName(rs.getString("RoleName"));
+                // add role to listRoles
                 listRoles.add(r);
             }
             return listRoles;
@@ -53,16 +58,19 @@ public class WorkerImplement implements WorkerInterface {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
+            // select all worker
             String query = "Select * from [Worker]";
             conn = dBContext.getConnection();
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             while (rs.next()) {
+                // get data worker from database
                 Worker worker = new Worker(rs.getInt("ID"),
                         rs.getString("Name"),
                         rs.getBoolean("Gender"),
                         rs.getBytes("Image")
                 );
+                // add to listWorkers
                 listWorkers.add(worker);
             }
             return listWorkers;
@@ -80,6 +88,7 @@ public class WorkerImplement implements WorkerInterface {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
+            // select Worker INNER JOIN Role when know Worker ID
             String query = "Select w.ID, w.[Name], w.Gender, w.RoleID, "
                     + "w.[Image], r.RoleName from [Worker] w INNER JOIN [Role] r"
                     + " ON w.RoleID = r.ID where w.ID = ?";
@@ -113,6 +122,7 @@ public class WorkerImplement implements WorkerInterface {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
+            // update worker where worker ID
             String query = "Update [Worker] set [Name] = ?, [Gender] = ?, "
                     + "[Image] = ? , [RoleID] = ? where [ID] = ?";
             conn = db.getConnection();
@@ -138,6 +148,7 @@ public class WorkerImplement implements WorkerInterface {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
+            // insert new worker
             String query = "Insert into [Worker] (Name, Gender, Image, RoleID)"
                     + " VALUES (?,?,?,?)";
             conn = db.getConnection();

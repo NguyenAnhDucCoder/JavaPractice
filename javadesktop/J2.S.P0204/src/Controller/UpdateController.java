@@ -7,7 +7,6 @@ package Controller;
 
 import Common.CommonSub;
 import static Common.CommonSub.ConvertFileToByte;
-import static Controller.MainScreenController.mainScreen;
 import Entity.Role;
 import Entity.Worker;
 import Model.WorkerImplement;
@@ -33,13 +32,15 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class UpdateController {
 
-    private DefaultComboBoxModel<Role> modelRole;
+    private final DefaultComboBoxModel<Role> modelRole;
     private File file;
-    UpdateScreen updateScreen;
+    private final UpdateScreen updateScreen;
     private Worker worker;
+    private final MainScreenController mainController;
 
-    public UpdateController() {
-        updateScreen = new UpdateScreen(mainScreen, true);
+    public UpdateController(MainScreenController mainController) {
+        this.mainController = mainController;
+        updateScreen = new UpdateScreen(mainController.getMainScreen(), true);
         // set model for jComboBox_Role
         updateScreen.getjComboBox_Role().setModel(modelRole = new DefaultComboBoxModel<>());
         listRole();
@@ -76,7 +77,7 @@ public class UpdateController {
 
     private void getWorkerById() {
         // get worker_id
-        int worker_id = Integer.parseInt(MainScreenController.getSelectedRow());
+        int worker_id = Integer.parseInt(mainController.getSelectedRow());
         WorkerImplement workerImplement = new WorkerImplement();
         try {
             // get worker by id
@@ -129,7 +130,7 @@ public class UpdateController {
         }
         WorkerImplement workerImplement = new WorkerImplement();
         // get worker id
-        int id = Integer.parseInt(MainScreenController.getSelectedRow());
+        int id = Integer.parseInt(mainController.getSelectedRow());
         // get name
         String name = updateScreen.getTxtName().getText().trim();
         // get gender
@@ -154,7 +155,7 @@ public class UpdateController {
                 // dispose
                 updateScreen.dispose();
                 // show data to jtable again
-                MainScreenController.showAllWorker();
+                mainController.showAllWorker();
             }
         } catch (Exception e) {
             // show error message
