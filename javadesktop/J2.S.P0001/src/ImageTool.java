@@ -78,8 +78,8 @@ public class ImageTool {
         }
         // check which scale is bigger to scale image
         if (scalebyWidth > scalebyHeight) {
-            // find new width of image
-            float newWidth = (float) imageIcon.getIconWidth() / scalebyWidth;
+            // set image width = image control 
+            float newWidth = control.getWidth();
             // find new height of image
             float newHeight = (float) imageIcon.getIconHeight() / scalebyWidth;
             // set new size of image scale by bigger scale
@@ -88,8 +88,8 @@ public class ImageTool {
         } else {
             // find new width of image
             float newWidth = (float) imageIcon.getIconWidth() / scalebyHeight;
-            // find new height of image
-            float newHeight = (float) imageIcon.getIconHeight() / scalebyHeight;
+            // set image height = image control
+            float newHeight = control.getHeight();
             // set new size of image by bigger scale
             Image newimageIcon = imageIcon.getImage().getScaledInstance((int) newWidth, (int) newHeight, java.awt.Image.SCALE_SMOOTH);
             return newimageIcon;
